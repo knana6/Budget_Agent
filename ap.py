@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-from openai import OpenAI
+import OpenAI #버전 모듈 호출 수정
 from dotenv import load_dotenv
 import os
 from datetime import datetime
@@ -9,7 +9,8 @@ import calendar
 import matplotlib.pyplot as plt
 
 load_dotenv()
-api_key = os.getenv("OPENAI_API_KEY")
+# api_key = os.getenv("OPENAI_API_KEY") 버전 모듈 오출 수
+openai.api_key = os.getenv("OPENAI_API_KEY")
 client = OpenAI(api_key=api_key)
 
 CSV_PATH = "data/ledger.csv"
@@ -50,12 +51,14 @@ def generate_advice(record):
         {"role": "user", "content": f"카테고리: {record['분류']}, 항목: {record['항목']}, 금액: {record['금액']}원. 돈을 절약하는 조언을 해줘."}
     ]
     try:
-        response = client.chat.completions.create(
+        #  response = client.chat.completions.create( 버전 모듈 호출 수
+        response = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
             messages=messages,
             temperature=0.7
         )
-        return response.choices[0].message.content.strip()
+        # return response.choices[0].message.content.strip() 버전 모듈 호출 수정
+        return response.choices[0].message["content"].strip()
     except Exception as e:
         return "(GPT 조언을 가져오는 데 실패했어요)"
 
