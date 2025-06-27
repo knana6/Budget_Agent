@@ -9,9 +9,9 @@ import calendar
 import matplotlib.pyplot as plt
 
 load_dotenv()
-# api_key = os.getenv("OPENAI_API_KEY") 버전 모듈 오출 수
+# api_key = os.getenv("OPENAI_API_KEY") 버전 모듈 오출 수정 
 openai.api_key = os.getenv("OPENAI_API_KEY")
-client = OpenAI(api_key=api_key)
+#client = OpenAI(api_key=api_key)# 버전 모듈 오류 수정 
 
 CSV_PATH = "data/ledger.csv"
 os.makedirs("data", exist_ok=True)
