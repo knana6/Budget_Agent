@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-import OpenAI #버전 모듈 호출 수정
+import openai #버전 모듈 호출 수정
 from dotenv import load_dotenv
 import os
 from datetime import datetime
