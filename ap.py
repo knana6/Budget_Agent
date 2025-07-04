@@ -8,6 +8,9 @@ from io import BytesIO
 import calendar
 import matplotlib.pyplot as plt
 
+
+st.write("✅ API Key 로드됨:", bool(os.getenv("OPENAI_API_KEY")))
+
 load_dotenv()
 # api_key = os.getenv("OPENAI_API_KEY") 버전 모듈 오출 수정 
 openai.api_key = os.getenv("OPENAI_API_KEY")
