@@ -45,21 +45,37 @@ def clear_all():
         os.remove(CSV_PATH)
 
 # GPT 조언 생성 함수
+# def generate_advice(record):
+#     messages = [
+#         {"role": "system", "content": "너는 AI 에이전트야. 사람들의 소비/소득 패턴을 분석하고 돈을 절약할 수 있도록 조언해주는 금융 어시스턴트야. 한 문장으로 도와줘."},
+#         {"role": "user", "content": f"카테고리: {record['분류']}, 항목: {record['항목']}, 금액: {record['금액']}원. 돈을 절약하는 조언을 해줘."}
+#     ]
+#     try:
+#         #  response = client.chat.completions.create( 버전 모듈 호출 수
+#         response = openai.chat.completions.create(
+#             model="gpt-3.5-turbo",
+#             messages=messages,
+#             temperature=0.7
+#         )
+#         # return response.choices[0].message.content.strip() 버전 모듈 호출 수정
+#         return response.choices[0].message.content.strip()
+#     except Exception as e:
+#         return "(GPT 조언을 가져오는 데 실패했어요)"
+
 def generate_advice(record):
     messages = [
         {"role": "system", "content": "너는 AI 에이전트야. 사람들의 소비/소득 패턴을 분석하고 돈을 절약할 수 있도록 조언해주는 금융 어시스턴트야. 한 문장으로 도와줘."},
         {"role": "user", "content": f"카테고리: {record['분류']}, 항목: {record['항목']}, 금액: {record['금액']}원. 돈을 절약하는 조언을 해줘."}
     ]
     try:
-        #  response = client.chat.completions.create( 버전 모듈 호출 수
-        response = openai.chat.completions.create(
+        response = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
             messages=messages,
             temperature=0.7
         )
-        # return response.choices[0].message.content.strip() 버전 모듈 호출 수정
-        return response.choices[0].message.content.strip()
+        return response.choices[0].message["content"].strip()
     except Exception as e:
+        st.error(f"GPT 호출 오류: {e}")
         return "(GPT 조언을 가져오는 데 실패했어요)"
 
 # 사용자 입력 파싱
