@@ -52,13 +52,13 @@ def generate_advice(record):
     ]
     try:
         #  response = client.chat.completions.create( 버전 모듈 호출 수
-        response = openai.ChatCompletion.create(
+        response = openai.chat.completions.create(
             model="gpt-3.5-turbo",
             messages=messages,
             temperature=0.7
         )
         # return response.choices[0].message.content.strip() 버전 모듈 호출 수정
-        return response.choices[0].message["content"].strip()
+        return response.choices[0].message.content.strip()
     except Exception as e:
         return "(GPT 조언을 가져오는 데 실패했어요)"
 
