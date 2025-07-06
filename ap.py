@@ -39,14 +39,21 @@ def undo_last():
         st.session_state.undo_count -= 1
         save_data(st.session_state.records)
 
-# 초기화
-def clear_all():
-    st.session_state.records = pd.DataFrame(columns=["날짜", "항목", "금액", "분류"])
-    st.session_state.undo_count = 0
-    st.session_state.gpt_advice = ""
-    save_data(st.session_state.records)
-    if os.path.exists(CSV_PATH):
-        os.remove(CSV_PATH)
+# # 초기화
+# def clear_all():
+#     st.session_state.records = pd.DataFrame(columns=["날짜", "항목", "금액", "분류"])
+#     st.session_state.undo_count = 0
+#     st.session_state.gpt_advice = ""
+#     save_data(st.session_state.records)
+#     if os.path.exists(CSV_PATH):
+#         os.remove(CSV_PATH)
+
+#다시실행
+def redo_last():
+    if st.session_state.undo_count > 0 and len(st.session_state.records) > 0:
+        st.session_state.records = st.session_state.records.iloc[:1]
+        st.session_state.undo_count += 1
+        save_data(st.session_state.records)
 
 # GPT 조언 생성 함수
 # def generate_advice(record):
@@ -194,11 +201,11 @@ with left:
                 st.session_state.cal_month -= 1
     with col2:
         if st.button("되돌리기"):
-            undo_last()
+            undo_last() #되돌리기 메소드 
             st.rerun()
     with col3:
-        if st.button("초기화"):
-            clear_all()
+        if st.button("다시실행"):
+            redo_last() #복원 메소드 
             st.rerun()
     with col4:
         if st.button("다음달"):
