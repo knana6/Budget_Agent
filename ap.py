@@ -20,8 +20,10 @@ load_dotenv()
 #client = OpenAI(api_key=api_key)# 버전 모듈 오류 수정 
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY")) ###
 
+if "username" not in st.session_state:
+    st.session_state["username"] = None
 
-if not st.session_state.username:
+if not st.session_state.get("username"):
     st.markdown("""
         <style>
         .main {opacity: 0.3;}
@@ -60,7 +62,8 @@ if not st.session_state.username:
 
 
 
-username = st.session_state.username
+# username = st.session_state.username
+username = st.session_state["username"]
 CSV_PATH = f"data/{username}_ledger.csv"
 # CSV_PATH = "data/ledger.csv"
 
@@ -220,47 +223,6 @@ def draw_calendar(df, year, month):
 
 
 st.set_page_config(layout="wide")
-
-
-if "username" not in st.session_state:
-    st.session_state.username = None
-
-if not st.session_state.username:
-    st.markdown("""
-        <style>
-        .main {opacity: 0.3;}
-        .login-box {
-            position: fixed;
-            top: 30%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: transparent;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.3);
-            z-index: 9999;
-        }
-        </style>
-        """, unsafe_allow_html=True)
-
-    st.markdown('<div class="login-box">', unsafe_allow_html=True)
-    st.markdown("### 환영합니다! 가계부 비서를 만들어 볼까요?")
-    username = st.text_input("이름 (한글 또는 영어)")
-    password = st.text_input("비밀번호 (4자리 숫자)", type="password")
-    st.markdown("</div>", unsafe_allow_html=True)
-
-    if st.button("시작하기"):
-        if not re.match(r"^[가-힣a-zA-Z]+$", username):
-            st.error("이름은 한글 또는 영어만 가능합니다.")
-        elif not re.match(r"^\d{4}$", password):
-            st.error("비밀번호는 4자리 숫자여야 합니다.")
-        else:
-            if authenticate(username, password):
-                st.session_state.username = username
-                st.rerun()
-            else:
-                st.error("비밀번호가 틀렸습니다.")
-    st.stop()
 
 
 st.title("💸 AI 가계부 챗봇")
