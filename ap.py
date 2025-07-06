@@ -191,7 +191,7 @@ with left:
     fig = draw_calendar(st.session_state.records, st.session_state.cal_year, st.session_state.cal_month)
     st.pyplot(fig)
 
-    col1, col2, col3, col4 = st.columns([1, 1, 1, 1])
+    col1, col2, col3, col4, col5 = st.columns([1, 1, 1 ,1, 1])
     with col1:
         if st.button("이전달"):
             if st.session_state.cal_month == 1:
@@ -204,17 +204,12 @@ with left:
             undo_last() #되돌리기 메소드 
             st.rerun()
     with col3:
-<<<<<<< HEAD
         if st.button("초기화"):
             clear_all() #
             st.rerun()
     with  col4:
         if st.button("다시실행"):
             redo_last() #다시실행 메소
-=======
-        if st.button("다시실행"): #기능수정 (1)
-            redo_last()
->>>>>>> 747cf463dd5b82d2591c9406c716253731f5eaf8
             st.rerun()
     with col4:
         if st.button("다음달"):
