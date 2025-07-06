@@ -44,6 +44,8 @@ if not st.session_state.get("username"):
 
     st.markdown('<div class="login-box"><h3>환영합니다! 가계부 비서를 만들어 볼까요?</h3></div>', unsafe_allow_html=True)
 
+    st.markdown("&nbsp;&nbsp;", unsafe_allow_html=True) ##2칸띄우기 
+ 
     username = st.text_input("이름 (한글 또는 영어)")
     password = st.text_input("비밀번호 (4자리 숫자)", type="password")
 
