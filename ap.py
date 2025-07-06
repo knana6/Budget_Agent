@@ -19,7 +19,10 @@ load_dotenv()
 # openai.api_key = os.getenv("OPENAI_API_KEY")
 #client = OpenAI(api_key=api_key)# 버전 모듈 오류 수정 
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY")) ###
+if "username" not in st.session_state:
+    st.session_state.username = None
 username = st.session_state.username
+
 
 CSV_PATH = f"data/{username}_ledger.csv"
 # CSV_PATH = "data/ledger.csv"
