@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-from openai import OpenAI #버전 모듈 호출 수정
+from openai import OpenAI #최신버전
 from dotenv import load_dotenv
 import os
 from datetime import datetime
@@ -68,8 +68,10 @@ def clear_all():
 
 def generate_advice(record):
     messages = [
-        {"role": "system", "content": "너는 AI 에이전트야. 사람들의 소비/소득 패턴을 분석하고 돈을 절약할 수 있도록 조언해주는 금융 어시스턴트야. 한 문장으로 도와줘."},
-        {"role": "user", "content": f"카테고리: {record['분류']}, 항목: {record['항목']}, 금액: {record['금액']}원. 돈을 절약하는 조언을 해줘."}
+        {"role": "system", 
+         "content": "너는 AI 에이전트야. 사람들의 소비/소득 패턴을 분석하고 돈을 절약할 수 있도록 조언해주는 금융 어시스턴트야. 한 문장으로 도와줘."},
+        {"role": "user", 
+         "content": f"카테고리: {record['분류']}, 항목: {record['항목']}, 금액: {record['금액']}원. 돈을 절약하는 조언을 해줘."}
     ]
     try:
         response = client.chat.completions.create(
