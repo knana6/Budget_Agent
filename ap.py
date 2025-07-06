@@ -204,12 +204,17 @@ with left:
             undo_last() #되돌리기 메소드 
             st.rerun()
     with col3:
+<<<<<<< HEAD
         if st.button("초기화"):
             clear_all() #
             st.rerun()
     with  col4:
         if st.button("다시실행"):
             redo_last() #다시실행 메소
+=======
+        if st.button("다시실행"): #기능수정 (1)
+            redo_last()
+>>>>>>> 747cf463dd5b82d2591c9406c716253731f5eaf8
             st.rerun()
     with col4:
         if st.button("다음달"):
