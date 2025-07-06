@@ -211,7 +211,7 @@ with left:
         if st.button("다시실행"):
             redo_last() #다시실행 메소
             st.rerun()
-    with col4:
+    with col5:
         if st.button("다음달"):
             if st.session_state.cal_month == 12:
                 st.session_state.cal_month = 1
