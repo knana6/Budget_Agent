@@ -30,7 +30,7 @@ if not st.session_state.username:
             top: 30%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background-color: white;
+            background-color: transparent;
             padding: 2rem;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0,0,0,0.3);
@@ -257,7 +257,7 @@ if not st.session_state.username:
         else:
             if authenticate(username, password):
                 st.session_state.username = username
-                st.experimental_rerun()
+                st.rerun()
             else:
                 st.error("비밀번호가 틀렸습니다.")
     st.stop()
