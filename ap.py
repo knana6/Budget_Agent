@@ -39,14 +39,14 @@ def undo_last():
         st.session_state.undo_count -= 1
         save_data(st.session_state.records)
 
-# # 초기화
-# def clear_all():
-#     st.session_state.records = pd.DataFrame(columns=["날짜", "항목", "금액", "분류"])
-#     st.session_state.undo_count = 0
-#     st.session_state.gpt_advice = ""
-#     save_data(st.session_state.records)
-#     if os.path.exists(CSV_PATH):
-#         os.remove(CSV_PATH)
+# 초기화
+def clear_all():
+    st.session_state.records = pd.DataFrame(columns=["날짜", "항목", "금액", "분류"])
+    st.session_state.undo_count = 0
+    st.session_state.gpt_advice = ""
+    save_data(st.session_state.records)
+    if os.path.exists(CSV_PATH):
+        os.remove(CSV_PATH)
 
 #다시실행
 def redo_last():
@@ -204,8 +204,12 @@ with left:
             undo_last() #되돌리기 메소드 
             st.rerun()
     with col3:
+        if st.button("초기화"):
+            clear_all() #
+            st.rerun()
+    with  col4:
         if st.button("다시실행"):
-            redo_last() #복원 메소드 
+            redo_last() #다시실행 메소
             st.rerun()
     with col4:
         if st.button("다음달"):
