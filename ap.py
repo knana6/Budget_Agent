@@ -48,6 +48,13 @@ def clear_all():
     if os.path.exists(CSV_PATH):
         os.remove(CSV_PATH)
 
+#다시실행
+def redo_last():
+    if st.session_state.undo_count > 0 and len(st.session_state.records) > 0:
+        st.session_state.records = st.session_state.records.iloc[:1]
+        st.session_state.undo_count += 1
+        save_data(st.session_state.records)
+
 # GPT 조언 생성 함수
 # def generate_advice(record):
 #     messages = [
@@ -197,8 +204,8 @@ with left:
             undo_last()
             st.rerun()
     with col3:
-        if st.button("초기화"):
-            clear_all()
+        if st.button("다시실행"): #기능수정 (1)
+            redo_last()
             st.rerun()
     with col4:
         if st.button("다음달"):
