@@ -23,12 +23,12 @@ def save_user(username, password):
     df = load_users()
     new_row = pd.DataFrame([{"username": str(username), "password": str(password)}])
     df = pd.concat([df, new_row], ignore_index=True)
-    print(f"[DEBUG] 저장 대상 데이터프레임:\n{df}")
+    # print(f"[DEBUG] 저장 대상 데이터프레임:\n{df}")
 
     try:
         # print(f"[DEBUG] 저장 경로: {os.path.abspath(USERS_PATH)}")
         df.to_csv(USERS_PATH, index=False, encoding="utf-8-sig")
-        print(f"[✅ 저장 완료] 사용자: {username}")
+        print(f"[✅ 저장됨] 사용자: {username}")
     except Exception as e:
         print(f"[❌ 저장 실패] 사용자: {username}, 에러: {e}")
 
