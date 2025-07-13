@@ -9,15 +9,29 @@ def load_users():
         return pd.read_csv(USERS_PATH)
     return pd.DataFrame(columns=["username", "password"])
 
+# def save_user(username, password):
+#     df = load_users()
+#     new_row = pd.DataFrame([{"username": username, "password": password}])
+#     df = pd.concat([df, new_row], ignore_index=True)
+#     try:
+#         df.to_csv(USERS_PATH, index=False)
+#         print(f"[✅ 저장 완료] 사용자: {username}")
+#     except Exception as e:
+#         print(f"[❌ 저장 실패] 사용자: {username}, 에러: {e}")   
+         
 def save_user(username, password):
     df = load_users()
     new_row = pd.DataFrame([{"username": username, "password": password}])
     df = pd.concat([df, new_row], ignore_index=True)
+    print(f"[DEBUG] 저장 대상 데이터프레임:\n{df}")
+
     try:
+        print(f"[DEBUG] 저장 경로: {os.path.abspath(USERS_PATH)}")
         df.to_csv(USERS_PATH, index=False)
         print(f"[✅ 저장 완료] 사용자: {username}")
     except Exception as e:
-        print(f"[❌ 저장 실패] 사용자: {username}, 에러: {e}")    
+        print(f"[❌ 저장 실패] 사용자: {username}, 에러: {e}")
+
 
 def authenticate(username, password):
     df = load_users()
