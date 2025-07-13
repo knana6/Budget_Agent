@@ -69,10 +69,43 @@ if "username" not in st.session_state:
 if not st.session_state.get("username"):
     st.markdown("""
         <style>
-        .main {opacity: 0.3;}
+        .main {opacity: 0.3;
+        }
+
+
+        .title-container {
+            position: absolute;  /* 고정 위치로 상단에 띄우기 */
+            top: 5%;             /* 상단에서 조금만 떨어지게 */
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            width: 90%;
+            z-index: 9999;
+        }         
+                
+        .title-container h1{
+        # margin-top: 20px;
+        # margin-bottom: 30px;
+        # text-align: center;    
+            font-size: 2.4rem;
+            font-weight: bold;
+            color: white;
+            margin: 0;
+            line-height: 1.3;
+            word-break: keep-all;  /* 줄 단위로 끊김 방지 */
+                
+        }
+                
+        @media (max-width: 768px) {
+            .title-container h1 {
+                font-size: 1.6rem;
+                line-height: 1.4;
+            }
+        }        
+
         .login-box {
             position: fixed;
-            top: 30%;
+            top: 45%;
             left: 50%;
             transform: translate(-50%, -50%);
             background-color: transparent;
