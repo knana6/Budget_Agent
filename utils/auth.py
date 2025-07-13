@@ -52,12 +52,12 @@ def authenticate(username, password):
 
     # username 존재 여부 확인
     if input_username not in df["username"].values:
-        print("[DEBUG] 신규 유저 → 저장")
+        print("신규 유저 저장")
         save_user(input_username, input_password)
         return True
 
     # 기존 유저의 비밀번호 확인
     stored_pw = df[df["username"] == input_username].iloc[0]["password"]
     match = stored_pw == input_password
-    print(f"[DEBUG] 저장된 비번: '{stored_pw}' / 입력 비번: '{input_password}' → 일치 여부: {match}")
+    # print(f"[DEBUG] 저장된 비번: '{stored_pw}' / 입력 비번: '{input_password}' → 일치 여부: {match}")
     return match
