@@ -1,5 +1,6 @@
 import pandas as pd
 import os
+import time
 
 USERS_PATH = "data/users.csv"
 os.makedirs("data", exist_ok=True)
@@ -28,9 +29,9 @@ def save_user(username, password):
     try:
         # print(f"[DEBUG] 저장 경로: {os.path.abspath(USERS_PATH)}")
         df.to_csv(USERS_PATH, index=False, encoding="utf-8-sig")
-        print(f"[✅ 저장됨] 사용자: {username}")
+        # print(f"[✅ 저장됨] 사용자: {username}")
     except Exception as e:
-        print(f"[❌ 저장 실패] 사용자: {username}, 에러: {e}")
+        # print(f"[❌ 저장 실패] 사용자: {username}, 에러: {e}")
 
 
 def authenticate(username, password):
@@ -52,7 +53,8 @@ def authenticate(username, password):
 
     # username 존재 여부 확인
     if input_username not in df["username"].values:
-        print("신규 유저 저장")
+        print("환영합니다! 이름과 비밀번호를 기억해 주세요")
+        time.sleep(2)
         save_user(input_username, input_password)
         return True
 
