@@ -1,8 +1,11 @@
 import streamlit as st
 import pandas as pd
-from openai import OpenAI #최신버전
+# from openai import OpenAI 위치변경
 from dotenv import load_dotenv
+load_dotenv()
+
 import os
+from openai import OpenAI #최신버전
 from datetime import datetime
 from io import BytesIO
 import calendar
@@ -14,7 +17,7 @@ import re
 
 st.write("✅ API Key 로드됨:", bool(os.getenv("OPENAI_API_KEY")))
 
-load_dotenv()
+# load_dotenv() 위치변경
 # api_key = os.getenv("OPENAI_API_KEY") 버전 모듈 오출 수정 
 # openai.api_key = os.getenv("OPENAI_API_KEY")
 #client = OpenAI(api_key=api_key)# 버전 모듈 오류 수정 

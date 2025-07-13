@@ -13,7 +13,11 @@ def save_user(username, password):
     df = load_users()
     new_row = pd.DataFrame([{"username": username, "password": password}])
     df = pd.concat([df, new_row], ignore_index=True)
-    df.to_csv(USERS_PATH, index=False)
+    try:
+        df.to_csv(USERS_PATH, index=False)
+        print(f"[✅ 저장 완료] 사용자: {username}")
+    except Exception as e:
+        print(f"[❌ 저장 실패] 사용자: {username}, 에러: {e}")    
 
 def authenticate(username, password):
     df = load_users()
