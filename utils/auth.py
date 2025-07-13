@@ -29,7 +29,7 @@ def save_user(username, password):
     try:
         # print(f"[DEBUG] 저장 경로: {os.path.abspath(USERS_PATH)}")
         df.to_csv(USERS_PATH, index=False, encoding="utf-8-sig")
-        print(f"[✅ 저장됨] 사용자: {username}")
+        # print(f"[✅ 저장됨] 사용자: {username}")
     except Exception as e:
         print(f"[❌ 저장 실패] 사용자: {username}, 에러: {e}")
 

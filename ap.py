@@ -171,24 +171,7 @@ def redo_last():
         st.session_state.undo_count += 1
         save_data(st.session_state.records)
 
-# GPT 조언 생성 함수
-# def generate_advice(record):
-#     messages = [
-#         {"role": "system", "content": "너는 AI 에이전트야. 사람들의 소비/소득 패턴을 분석하고 돈을 절약할 수 있도록 조언해주는 금융 어시스턴트야. 한 문장으로 도와줘."},
-#         {"role": "user", "content": f"카테고리: {record['분류']}, 항목: {record['항목']}, 금액: {record['금액']}원. 돈을 절약하는 조언을 해줘."}
-#     ]
-#     try:
-#         #  response = client.chat.completions.create( 버전 모듈 호출 수
-#         response = openai.chat.completions.create(
-#             model="gpt-3.5-turbo",
-#             messages=messages,
-#             temperature=0.7
-#         )
-#         # return response.choices[0].message.content.strip() 버전 모듈 호출 수정
-#         return response.choices[0].message.content.strip()
-#     except Exception as e:
-#         return "(GPT 조언을 가져오는 데 실패했어요)"
-
+#GPT 생성 조언 함
 def generate_advice(record):
     messages = [
         {"role": "system", 
@@ -312,7 +295,7 @@ with left:
     fig = draw_calendar(st.session_state.records, st.session_state.cal_year, st.session_state.cal_month)
     st.pyplot(fig)
 
-    col1, col2, col3, col4, col5 = st.columns([1, 1, 1 ,1, 1])
+    col1, col2, col3, col4  = st.columns([1, 1, 1 ,1])
     with col1:
         if st.button("이전달"):
             if st.session_state.cal_month == 1:
@@ -328,11 +311,11 @@ with left:
         if st.button("초기화"):
             clear_all() #
             st.rerun()
-    with  col4:
-        if st.button("다시실행"):
-            redo_last() #다시실행 메소
-            st.rerun()
-    with col5:
+    # with  col4:
+    #     if st.button("다시실행"):
+    #         redo_last() #다시실행 메소
+    #         st.rerun()
+    with col4:
         if st.button("다음달"):
             if st.session_state.cal_month == 12:
                 st.session_state.cal_month = 1
