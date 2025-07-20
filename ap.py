@@ -26,45 +26,6 @@ client = OpenAI(api_key=os.getenv("OPENAI_API_KEY")) ###
 if "username" not in st.session_state:
     st.session_state["username"] = None
 
-# if not st.session_state.get("username"):
-#     st.markdown("""
-#         <style>
-#         .main {opacity: 0.3;}
-#         .login-box {
-#             position: fixed;
-#             top: 30%;
-#             left: 50%;
-#             transform: translate(-50%, -50%);
-#             background-color: transparent;
-#             padding: 2rem;
-#             border-radius: 10px;
-#             box-shadow: 0 0 10px rgba(0,0,0,0.3);
-#             z-index: 9999;
-#             text-align: center;
-#         }
-#         </style>
-#         """, unsafe_allow_html=True)
-
-#     st.markdown('<div class="login-box"><h3>환영합니다! 가계부 비서를 만들어 볼까요?</h3></div>', unsafe_allow_html=True)
-
-#     st.markdown("&nbsp;&nbsp;", unsafe_allow_html=True) ##2칸띄우기 
-#     st.markdown("&nbsp;&nbsp;", unsafe_allow_html=True) ##2칸띄우기 
- 
-#     username = st.text_input("이름 (한글 또는 영어)")
-#     password = st.text_input("비밀번호 (4자리 숫자)", type="password")
-
-#     if st.button("시작하기"):
-#         if not re.match(r"^[가-힣a-zA-Z]+$", username):
-#             st.error("이름은 한글 또는 영어만 입력 가능합니다.")
-#         elif not re.match(r"^\d{4}$", password):
-#             st.error("비밀번호는 4자리 숫자여야 합니다.")
-#         else:
-#             if authenticate(username, password):
-#                 st.session_state.username = username
-#                 st.rerun()
-#             else:
-#                 st.error("비밀번호가 틀렸습니다.")
-#     st.stop()  # 로그인 전엔 아래 코드 차단
 
 if not st.session_state.get("username"):
     st.markdown("""
@@ -78,7 +39,7 @@ if not st.session_state.get("username"):
                 
         }
         @media (max-width: 768px) {
-            .title-container h1 {
+            .title-container h2 {
                 font-size: 1.6rem;
                 line-height: 1.4;   
             }
@@ -143,6 +104,8 @@ def load_data():
         df["날짜"] = pd.to_datetime(df["날짜"], errors="coerce")
         return df
     return pd.DataFrame(columns=["날짜", "항목", "금액", "분류"])
+
+st.session_state.records = load_data()
 
 # 기록 저장
 def save_data(df):
