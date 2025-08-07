@@ -15,7 +15,7 @@ from utils.auth import authenticate
 import re
 
 
-st.write("✅ API Key 로드됨:", bool(os.getenv("OPENAI_API_KEY")))
+# st.write("✅ API Key 로드됨:", bool(os.getenv("OPENAI_API_KEY")))
 
 # load_dotenv() 위치변경
 # api_key = os.getenv("OPENAI_API_KEY") 버전 모듈 오출 수정 
@@ -69,7 +69,7 @@ if not st.session_state.get("username"):
     password = st.text_input("비밀번호 (4자리 숫자)", type="password").strip()
 
     if st.button("시작하기"):
-        st.write(f"[DEBUG] 입력 username: '{username}', password: '{password}'")
+        st.write(f" username: '{username}', password: '{password}'")
 
         if not re.match(r"^[가-힣a-zA-Z]+$", username):
             st.error("이름은 한글 또는 영어만 입력 가능합니다.")
@@ -77,7 +77,7 @@ if not st.session_state.get("username"):
             st.error("비밀번호는 4자리 숫자여야 합니다.")
         else:
             success = authenticate(username, password)
-            st.write(f"[DEBUG] authenticate 결과: {success}")
+            st.write(f" ")
             if success:
                 st.session_state.username = username
                 st.success("로그인 성공! 🎉")
